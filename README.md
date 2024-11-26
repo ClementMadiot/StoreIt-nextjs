@@ -29,6 +29,9 @@ Extended animation utilities for Tailwind CSS that brings various utility classe
 -[shadcn/ui](https://ui.shadcn.com/docs)
 Open-source UI component library for React that focuses on flexibility and customization. 
 
+-[Appwrite](https://www.npmjs.com/package/node-appwrite)
+Appwrite is an open-source backend as a service server that abstract and simplify complex and repetitive development tasks behind a very simple to use REST API.
+
 ## <a name="features">📝 Features</a>
 
 👉 **Modern Form**: React Hook Form from *shadcn/ui*.
