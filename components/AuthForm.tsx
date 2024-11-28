@@ -53,6 +53,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
     setIsLoading(true);
     setErrorMessage("");
 
+    // update the user's account onSubmit
     try {
       const user = await createAccount({
         fullName: values.fullName || "",
@@ -154,7 +155,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
       </Form>
       {/* OTP Verification  */}
 
-      {true && (
+      {accountId && (
         <OTPModal email={form.getValues("email")} accountId={accountId} />
       )}
     </>
