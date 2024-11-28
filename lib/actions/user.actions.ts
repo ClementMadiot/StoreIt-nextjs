@@ -28,14 +28,14 @@ const getUserByEmail = async (email: string) => {
 
 const handleError = (error: unknown, message: string) => {
   console.log(message, error);
-  throw error
-}
+  throw error;
+};
 
 const sendEmailOTP = async ({ email }: { email: string }) => {
   const { account } = await createAdminClient();
 
   try {
-    const session = await account.createEmailToken(ID.unique(), email)
+    const session = await account.createEmailToken(ID.unique(), email);
 
     return session.userId;
   } catch (error) {
@@ -52,10 +52,10 @@ export const createAccount = async ({
 }) => {
   const existingUser = await getUserByEmail(email);
 
-  const accountId = await sendEmailOTP({email});
-  if(!accountId) throw new Error("Failed to send an OTP");
+  const accountId = await sendEmailOTP({ email });
+  if (!accountId) throw new Error("Failed to send an OTP");
 
-  if(!existingUser){
+  if (!existingUser) {
     const { databases } = await createAdminClient();
     await databases.createDocument(
       appwriteConfig.databaseId,
@@ -64,10 +64,11 @@ export const createAccount = async ({
       {
         fullName,
         email,
-        avatar: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
+        avatar:
+          "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
         accountId,
       }
     );
   }
-  return parseStringify({accountId});
+  return parseStringify({ accountId });
 };
