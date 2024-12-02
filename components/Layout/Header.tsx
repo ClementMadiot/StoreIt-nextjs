@@ -15,8 +15,8 @@ const Header = () => {
             <Image
               src="/assets/icons/logout.svg"
               alt="Logout"
-              width={20}
-              height={20}
+              width={24}
+              height={24}
               className="w-6"
             />
           </Button>
