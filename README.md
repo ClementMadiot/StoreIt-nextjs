@@ -32,6 +32,9 @@ Open-source UI component library for React that focuses on flexibility and custo
 -[Appwrite](https://www.npmjs.com/package/node-appwrite)
 Appwrite is an open-source backend as a service server that abstract and simplify complex and repetitive development tasks behind a very simple to use REST API.
 
+-[react-dropzone](https://react-dropzone.js.org/)
+Simple React hook to create a HTML5-compliant drag'n'drop zone for files
+
 ## <a name="features">📝 Features</a>
 
 👉 **Modern Form**: React Hook Form from *shadcn/ui*.
