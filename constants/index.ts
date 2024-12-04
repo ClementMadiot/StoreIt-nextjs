@@ -8,3 +8,5 @@ export const navItems = [
 
 export const avatarplaceholderUrl =
   "https://img.freepik.com/psd-gratuit/illustration-3d-personne-lunettes-soleil_23-2149436188.jpg?semtu003dais_hybrid";
+
+export const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB

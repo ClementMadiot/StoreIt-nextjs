@@ -2,12 +2,15 @@
 
 import React, { useCallback, useState } from "react";
 
+import Thumbnail from "./Thumbnail";
+import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 import { Button } from "../ui/button";
+import { useToast } from "@/hooks/use-toast"
+
 import { cn, convertFileToUrl } from "@/lib/utils";
-import Image from "next/image";
 import { getFileType } from "@/lib/utils";
-import Thumbnail from "./Thumbnail";
+import { MAX_FILE_SIZE } from "@/constants";
 
 interface Props {
   ownerId: string;
@@ -15,13 +18,37 @@ interface Props {
   className?: string;
 }
 const FileUploader = ({ ownerId, accountId, className }: Props) => {
+  const { toast } = useToast();
   const [files, setFiles] = useState<File[]>([]);
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     // Do something with the files
     setFiles(acceptedFiles);
+
+    const uploadPromises = acceptedFiles.map(async (file) => {
+      if (file.size > MAX_FILE_SIZE) {
+        setFiles((prevFiles) =>
+          prevFiles.filter((prevFile) => prevFile.name !== file.name));
+
+        return toast({
+          description: (
+            <p className="body-2 text-white">
+              <span className="font-semibold">{file.name}</span>
+              is too large. Max file size is 50MB
+            </p>
+          ), className: 'error-toast'
+        })
+      }
+    });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+  const handleRemoveFile = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    fileName: string
+  ) => {
+    e.stopPropagation();
+    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+  };
   return (
     <div {...getRootProps()} className="cursor-pointer">
       <input {...getInputProps()} />
@@ -47,21 +74,38 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
                 <div className="flex items-center gap-3">
                   {/* render the preview of the img upload  */}
                   <Thumbnail
-                  type={type}
-                  extension={extension}
-                  url={convertFileToUrl(file)}
-                  /> 
+                    type={type}
+                    extension={extension}
+                    url={convertFileToUrl(file)}
+                  />
+                  <div className="preview-item-name">
+                    {file.name}
+                    <Image
+                      src="/assets/icons/file-loader.gif"
+                      width={80}
+                      height={26}
+                      alt="loading"
+                    />
+                  </div>
                 </div>
+
+                <Image
+                  src="/assets/icons/remove.svg"
+                  width={24}
+                  height={24}
+                  alt="remove"
+                  onClick={(e) => handleRemoveFile(e, file.name)}
+                />
               </li>
             );
           })}
         </ul>
       )}
-      {isDragActive ? (
+      {/* {isDragActive ? (
         <p>Drop the files here ...</p>
       ) : (
         <p>Drag 'n' drop some files here, or click to select files</p>
-      )}
+      )} */}
     </div>
   );
 };
