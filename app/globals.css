@@ -11,6 +11,11 @@
     @apply bg-white text-dark-200 min-h-screen;
   }
 
+  img {
+    width: auto;
+    height: auto;
+}
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
     height: 3px;

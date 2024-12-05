@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -40,7 +40,7 @@ const OTPModal = ({
     try {
       // call the API to verify the OTP
       const sessionId = await verifySecret({ accountId, password });
-      if(sessionId) router.push('/')
+      if (sessionId) router.push("/");
     } catch (error) {
       console.log("failed to verify OTP", error);
     }
@@ -53,7 +53,10 @@ const OTPModal = ({
   };
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialogContent className="shad-alert-dialog">
+      <AlertDialogContent
+        className="shad-alert-dialog"
+        aria-describedby="otp-description"
+      >
         <AlertDialogHeader className="relative flex justify-center">
           <AlertDialogTitle className="h2 text-center">
             Enter your OTP
@@ -66,7 +69,10 @@ const OTPModal = ({
             className="otp-close-button"
             onClick={() => setIsOpen(false)}
           />
-          <AlertDialogDescription className="subtitle-2 text-center text-light-100">
+          <AlertDialogDescription
+            id="otp-description"
+            className="subtitle-2 text-center text-light-100"
+          >
             We&apos;ve sent a code to{" "}
             <span className="p-1 text-brand">{email}</span>
           </AlertDialogDescription>

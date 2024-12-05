@@ -41,7 +41,6 @@ const MobileNavigation = ({
         alt="logo"
         width={120}
         height={52}
-        className="h-auto"
       />
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger>
@@ -52,7 +51,7 @@ const MobileNavigation = ({
             height={30}
           />
         </SheetTrigger>
-        <SheetContent className="shad-sheet h-screen px-3">
+        <SheetContent className="shad-sheet h-screen px-3" aria-describedby={undefined}>
           <SheetTitle>
             <div className="header-user">
               <Image
@@ -98,7 +97,7 @@ const MobileNavigation = ({
 
           <Separator className="my-5 bg-light-200/20" />
           <div className="flex flex-col justify-between gap-5 pb-5">
-            <FileUploader />
+            <FileUploader ownerId={ownerId} accountId={accountId} />
             <Button
               type="submit"
               className="mobile-sign-out-button"
@@ -109,7 +108,6 @@ const MobileNavigation = ({
                 alt="Logout"
                 width={24}
                 height={24}
-                className="w-6"
               />
               <p>Logout</p>
             </Button>
