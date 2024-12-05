@@ -18,7 +18,7 @@ import FileUploader from "./Layout/FileUploader";
 import { signOutUser } from "@/lib/actions/user.actions";
 
 interface Props {
-  ownerId: string;
+  $id: string;
   accountId: string;
   fullName: string;
   email: string;
@@ -26,7 +26,7 @@ interface Props {
 }
 
 const MobileNavigation = ({
-  ownerId,
+  $id :ownerId,
   accountId,
   fullName,
   email,
