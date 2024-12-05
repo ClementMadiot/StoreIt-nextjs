@@ -6,7 +6,7 @@ import Thumbnail from "./Thumbnail";
 import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 import { Button } from "../ui/button";
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast";
 
 import { cn, convertFileToUrl } from "@/lib/utils";
 import { getFileType } from "@/lib/utils";
@@ -27,7 +27,8 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
     const uploadPromises = acceptedFiles.map(async (file) => {
       if (file.size > MAX_FILE_SIZE) {
         setFiles((prevFiles) =>
-          prevFiles.filter((prevFile) => prevFile.name !== file.name));
+          prevFiles.filter((prevFile) => prevFile.name !== file.name)
+        );
 
         return toast({
           description: (
@@ -35,8 +36,9 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
               <span className="font-semibold">{file.name}</span>
               is too large. Max file size is 50MB
             </p>
-          ), className: 'error-toast'
-        })
+          ),
+          className: "error-toast",
+        });
       }
     });
   }, []);
@@ -51,13 +53,6 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
     setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
   };
 
-  const handleRemoveFile = (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
-    fileName: string
-  ) => {
-    e.stopPropagation();
-    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
-  };
   return (
     <div {...getRootProps()} className="cursor-pointer">
       <input {...getInputProps()} />
