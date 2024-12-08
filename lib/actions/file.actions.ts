@@ -88,7 +88,7 @@ export const getFiles = async () => {
 
     const queries = createQueries(currentUser);
 
-    console.log({currentUser, queries});
+    // console.log({currentUser, queries});
     
     
     const files = await databases.listDocuments(
@@ -96,7 +96,7 @@ export const getFiles = async () => {
       appwriteConfig.filesCollectionId,
       queries
     );
-    console.log({files});
+    // console.log({files});
 
     return parseStringify(files);
   } catch (error) {

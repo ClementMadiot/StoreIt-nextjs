@@ -1,5 +1,6 @@
 import Sort from "@/components/Layout/Sort";
 import { getFiles } from "@/lib/actions/file.actions";
+import { Models } from "node-appwrite";
 
 // interface SearchParamProps {
 //   params?: Promise<SegmentParams>;
@@ -31,8 +32,15 @@ const Page = async ({ params }: SearchParamProps) => {
       </section>
 
       {/* Render the files  */}
+
       {files.length > 0 ? (
-        <section></section>
+        <section className="file-list">
+          {files.documents.map((file: Models.Document) => (
+            <h1 key={file.$id} className="h1">
+              {file.name}
+            </h1>
+          ))}
+        </section>
       ) : (
         <p className="empty-list">No files uploaded</p>
       )}
