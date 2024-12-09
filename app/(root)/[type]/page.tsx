@@ -33,7 +33,7 @@ const Page = async ({ params }: SearchParamProps) => {
 
       {/* Render the files  */}
 
-      {files.length > 0 ? (
+      {files.total > 0 ? (
         <section className="file-list">
           {files.documents.map((file: Models.Document) => (
             <h1 key={file.$id} className="h1">

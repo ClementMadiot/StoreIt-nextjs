@@ -8,13 +8,6 @@ import { constructFileUrl, getFileType, parseStringify } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "./user.actions";
 
-interface UploadFileProps {
-  file: File;
-  ownerId: string;
-  accountId: string;
-  path: string;
-}
-
 const handleError = (error: unknown, message: string) => {
   console.log(error, message);
   throw error;
@@ -71,8 +64,10 @@ export const uploadFile = async ({
 const createQueries = (currentUser: Models.Document) => {
   // Query get access to files that the user owns or has access to
   const queries = [
-    Query.equal("owner", currentUser.$id),
-    Query.contains("users", currentUser.email),
+    Query.or([
+      Query.equal("owner", currentUser.$id),
+      Query.contains("users", currentUser.email),
+    ]),
   ];
   // TODO : Search. sort, limit
   return queries;
@@ -88,18 +83,19 @@ export const getFiles = async () => {
 
     const queries = createQueries(currentUser);
 
-    // console.log({currentUser, queries});
-    
-    
+    console.log("Queries:", queries); // Log the queries to ensure they are correct
+
     const files = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.filesCollectionId,
       queries
     );
-    // console.log({files});
+
+    console.log("All files response:", { files }); // Log all files to see what is returned
 
     return parseStringify(files);
   } catch (error) {
-    handleError(error, "Failed to get files");
+    console.error("Failed to get files", error);
+    throw error;
   }
 };
