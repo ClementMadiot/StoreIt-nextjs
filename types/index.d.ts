@@ -25,12 +25,12 @@ declare interface GetFilesProps {
   sort?: string;
   limit?: number;
 }
-declare interface RenameFileProps {
-  fileId: string;
-  name: string;
-  extension: string;
-  path: string;
-}
+// declare interface RenameFileProps {
+//   fileId: string;
+//   name: string;
+//   extension: string;
+//   path: string;
+// }
 declare interface UpdateFileUsersProps {
   fileId: string;
   emails: string[];
