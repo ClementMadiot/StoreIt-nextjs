@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -24,9 +23,13 @@ import Link from "next/link";
 import { constructDownloadUrl } from "@/lib/utils";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { renameFile } from "@/lib/actions/file.actions";
+import {
+  deleteFile,
+  renameFile,
+  updateFileUsers,
+} from "@/lib/actions/file.actions";
 import { usePathname } from "next/navigation";
-import { FileDetails } from "./Action.ModalContent";
+import { FileDetails, ShareInput } from "./Action.ModalContent";
 
 interface ActionType {
   label: string;
@@ -40,6 +43,7 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
   const [action, setAction] = useState<ActionType | null>(null);
   const [name, setName] = useState(file.name);
   const [isLoading, setIsLoading] = useState(false);
+  const [emails, setEmails] = useState<string[]>([]);
   const path = usePathname();
 
   const closeAllModal = () => {
@@ -58,8 +62,9 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
     const actions = {
       rename: () =>
         renameFile({ fileId: file.$id, name, extension: file.extension, path }),
-      share: () => console.log("Share"),
-      delete: () => console.log("Delete"),
+      share: () => updateFileUsers({ fileId: file.$id, emails, path }),
+      delete: () =>
+        deleteFile({ fileId: file.$id, bucketFileId: file.bucketFileId, path }),
     };
 
     success = await actions[action.value as keyof typeof actions]();
@@ -67,13 +72,17 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
     if (success) closeAllModal();
     setIsLoading(false);
   };
+
+  // Remove the user from the sharing functionality
+  const handleRemoveSharingUser = () => {};
+
   const renderDialogContent = () => {
     if (!action) return null;
 
     const { value, label } = action;
 
     return (
-      <DialogContent className="shad-dialog button">
+      <DialogContent className="shad-dialog button" aria-describedby="modal-action">
         <DialogHeader className="flex flex-col gap-3">
           <DialogTitle className="text-center text-light-100">
             {label}
@@ -86,26 +95,39 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
             />
           )}
           {value === "details" && <FileDetails file={file} />}
-          </DialogHeader>
-          {["rename", "share", "delete"].includes(value) && (
-            <DialogFooter className="flex flex-col gap-3 md:flex-row">
-              <Button onClick={closeAllModal} className="modal-cancel-button">
-                Cancel
-              </Button>
-              <Button onClick={handleAction} className="modal-submit-button">
-                <p className="capitalize">{value}</p>
-                {isLoading && (
-                  <Image
-                    src="/assets/icons/loader.svg"
-                    alt="loader"
-                    width={24}
-                    height={24}
-                    className="animate-spin"
-                  />
-                )}
-              </Button>
-            </DialogFooter>
+          {value === "share" && (
+            <ShareInput
+              file={file}
+              onInputChange={setEmails}
+              onRemove={handleRemoveSharingUser}
+            />
           )}
+          {value === "delete" && (
+            <p className="delete-confirmation">
+              Are you sure you want to delete{" "}
+              <span className="delete-file-name">{file.name}</span>
+            </p>
+          )}
+        </DialogHeader>
+        {["rename", "share", "delete"].includes(value) && (
+          <DialogFooter className="flex flex-col gap-3 md:flex-row">
+            <Button onClick={closeAllModal} className="modal-cancel-button">
+              Cancel
+            </Button>
+            <Button onClick={handleAction} className="modal-submit-button">
+              <p className="capitalize">{value}</p>
+              {isLoading && (
+                <Image
+                  src="/assets/icons/loader.svg"
+                  alt="loader"
+                  width={24}
+                  height={24}
+                  className="animate-spin"
+                />
+              )}
+            </Button>
+          </DialogFooter>
+        )}
       </DialogContent>
     );
   };
