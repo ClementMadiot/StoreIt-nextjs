@@ -83,7 +83,7 @@ export const getFiles = async () => {
 
     const queries = createQueries(currentUser);
 
-    console.log("Queries:", queries); // Log the queries to ensure they are correct
+    // console.log("Queries:", queries); // Log the queries to ensure they are correct
 
     const files = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -91,7 +91,7 @@ export const getFiles = async () => {
       queries
     );
 
-    console.log("All files response:", { files }); // Log all files to see what is returned
+    // console.log("All files response:", { files }); // Log all files to see what is returned
 
     return parseStringify(files);
   } catch (error) {
