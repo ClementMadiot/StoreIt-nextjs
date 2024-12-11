@@ -13,6 +13,14 @@ const handleError = (error: unknown, message: string) => {
   throw error;
 };
 
+// Upload file
+interface UploadFileProps {
+  file: File;
+  ownerId: string;
+  accountId: string;
+  path: string;
+}
+
 export const uploadFile = async ({
   file,
   ownerId,
@@ -61,7 +69,7 @@ export const uploadFile = async ({
   }
 };
 
-const createQueries = (currentUser: Models.Document) => {
+const createQueries = (currentUser: Models.Document, types: string[]) => {
   // Query get access to files that the user owns or has access to
   const queries = [
     Query.or([
@@ -69,11 +77,23 @@ const createQueries = (currentUser: Models.Document) => {
       Query.contains("users", currentUser.email),
     ]),
   ];
-  // TODO : Search. sort, limit
+  // Type filtering
+  if (types.length > 0) queries.push(Query.equal("type", types));
+
   return queries;
 };
 
-export const getFiles = async () => {
+// type files
+type FileType = "document" | "image" | "video" | "audio" | "other";
+
+interface GetFilesProps {
+  types: FileType[];
+  searchText?: string;
+  sort?: string;
+  limit?: number;
+}
+
+export const getFiles = async ({ types = [] }: GetFilesProps) => {
   const { databases } = await createAdminClient();
 
   try {
@@ -81,7 +101,7 @@ export const getFiles = async () => {
 
     if (!currentUser) throw new Error("User not found");
 
-    const queries = createQueries(currentUser);
+    const queries = createQueries(currentUser, types);
 
     // console.log("Queries:", queries); // Log the queries to ensure they are correct
 

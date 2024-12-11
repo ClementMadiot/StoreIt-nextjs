@@ -14,12 +14,12 @@ import { uploadFile } from "@/lib/actions/file.actions";
 import { useToast } from "@/hooks/use-toast";
 import { usePathname } from "next/navigation";
 
-interface Props {
+interface FileUploaderProps {
   ownerId: string;
   accountId: string;
   className?: string;
 }
-const FileUploader = ({ ownerId, accountId, className }: Props) => {
+const FileUploader = ({ ownerId, accountId, className }: FileUploaderProps) => {
   const path = usePathname();
   const { toast } = useToast();
   const [files, setFiles] = useState<File[]>([]);

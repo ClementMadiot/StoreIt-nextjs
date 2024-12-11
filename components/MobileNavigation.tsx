@@ -17,7 +17,7 @@ import { Button } from "./ui/button";
 import FileUploader from "./Layout/FileUploader";
 import { signOutUser } from "@/lib/actions/user.actions";
 
-interface Props {
+interface MobileNavigationProps {
   $id: string;
   accountId: string;
   fullName: string;
@@ -31,7 +31,7 @@ const MobileNavigation = ({
   fullName,
   email,
   avatar,
-}: Props) => {
+}: MobileNavigationProps) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   return (
