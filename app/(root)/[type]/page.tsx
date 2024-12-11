@@ -9,13 +9,15 @@ interface SearchParamProps {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-const Page = async ({ params }: SearchParamProps) => {
+const Page = async ({ searchParams, params }: SearchParamProps) => {
   const type = ((await params)?.type as string) || "";
+  const searchText = ((await searchParams)?.query as string) || "";
+  const sort = ((await searchParams)?.sort as string) || "";
 
-  const types = getFileTypesParams(type) as FileType[]
+  const types = getFileTypesParams(type) as FileType[];
 
   // make a request to get the files
-  const files = await getFiles({ types });
+  const files = await getFiles({ types, searchText, sort });
 
   return (
     <div className="page-container">
