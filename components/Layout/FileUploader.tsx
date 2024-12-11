@@ -111,7 +111,6 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
                     />
                   </div>
                 </div>
-                `
                 <Image
                   src="/assets/icons/remove.svg"
                   width={24}

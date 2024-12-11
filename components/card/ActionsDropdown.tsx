@@ -50,7 +50,7 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
     setIsModalOpen(false);
     setIsDropdownOpen(false);
     setAction(null);
-    // setEmail([])
+    // setEmails([])
   };
 
   const handleAction = async () => {
@@ -74,7 +74,18 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
   };
 
   // Remove the user from the sharing functionality
-  const handleRemoveSharingUser = () => {};
+  const handleRemoveUser = async (email: string) => {
+    const updatedEmails = emails.filter((e) => e !== email);
+
+    const success = await updateFileUsers({
+      fileId: file.$id,
+      emails: updatedEmails,
+      path,
+    });
+
+    if (success) setEmails(updatedEmails);
+    closeAllModal();
+  };
 
   const renderDialogContent = () => {
     if (!action) return null;
@@ -82,7 +93,10 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
     const { value, label } = action;
 
     return (
-      <DialogContent className="shad-dialog button" aria-describedby="modal-action">
+      <DialogContent
+        className="shad-dialog button"
+        aria-describedby="modal-action"
+      >
         <DialogHeader className="flex flex-col gap-3">
           <DialogTitle className="text-center text-light-100">
             {label}
@@ -99,7 +113,7 @@ const ActionsDropdown = ({ file }: { file: Models.Document }) => {
             <ShareInput
               file={file}
               onInputChange={setEmails}
-              onRemove={handleRemoveSharingUser}
+              onRemove={handleRemoveUser}
             />
           )}
           {value === "delete" && (

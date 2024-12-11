@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { sendEmailOTP, verifySecret } from "@/lib/actions/user.actions";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
