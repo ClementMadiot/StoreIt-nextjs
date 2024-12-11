@@ -35,6 +35,9 @@ Appwrite is an open-source backend as a service server that abstract and simplif
 -[react-dropzone](https://react-dropzone.js.org/)
 Simple React hook to create a HTML5-compliant drag'n'drop zone for files
 
+-[useDebounce](https://www.npmjs.com/package/use-debounce)
+Delay the execution of function or state update with useDebounce.
+
 ## <a name="features">📝 Features</a>
 
 👉 **Modern Form**: React Hook Form from *shadcn/ui*.
