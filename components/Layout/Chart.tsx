@@ -64,15 +64,15 @@ export const Chart = ({ used = 0 }: { used: number }) => {
                       >
                         <tspan
                           x={viewBox.cx}
-                          y={viewBox.cy}
+                          y={(viewBox.cy || 0) - 10}
                           className="chart-total-percentage"
                         >
                           {used && calculatePercentage(used)}%
                         </tspan>
                         <tspan
                           x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-white/70">
+                          y={(viewBox.cy || 0) + 20}
+                          className="fill-white/70 subtitle-1 ">
                             Space used
                           </tspan>
                       </text>
