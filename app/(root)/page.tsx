@@ -1,13 +1,13 @@
 import FormattedDateTime from "@/components/card/FormattedDateTime";
+import { Chart } from "@/components/Layout/Chart";
 import { getFiles, getTotalSpaceUsed } from "@/lib/actions/file.actions";
-import { getUsageSummary } from "@/lib/utils";
+import { convertFileSize, getUsageSummary } from "@/lib/utils";
 import Image from "next/image";
-import { Models } from "node-appwrite";
 
-export default async function Dashboard({ file }: { file: Models.Document }) {
+export default async function Dashboard() {
   // Parallel Fetching
   const [files, totalSpace] = await Promise.all([
-    getFiles({ type: [], limit: 10 }),
+    getFiles({ types: [], limit: 10 }),
     getTotalSpaceUsed(),
   ]);
 
@@ -16,6 +16,7 @@ export default async function Dashboard({ file }: { file: Models.Document }) {
 
   return (
     <div className="dashboard-container">
+      <Chart used={totalSpace.used} />
       <section className="dashboard-summary-list">
         {usageSummary.map((sum) => (
           <div key={sum.title} className="dashboard-summary-card">
@@ -26,7 +27,7 @@ export default async function Dashboard({ file }: { file: Models.Document }) {
               width={24}
               height={24}
             />
-            <p className="summary-type-size">{sum.size} GB</p>
+            <p className="summary-type-size">{convertFileSize(sum.size)}</p>
             <div className="text-center space-y-4">
               <p className="summary-type-title mt-2">{sum.title}</p>
               <div className="w-full h-[2px] bg-light-300 my-4" />
