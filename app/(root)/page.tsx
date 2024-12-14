@@ -22,7 +22,7 @@ export default async function Dashboard() {
     <div className="dashboard-container">
       <section>
         <Chart used={totalSpace.used} />
-      </section>
+
       {/* Summary list */}
       <ul className="dashboard-summary-list">
         {usageSummary.map((sum) => (
@@ -31,7 +31,7 @@ export default async function Dashboard() {
             key={sum.title}
             className="dashboard-summary-card"
           >
-            <div key={sum.title} className="space-y-4">
+            <div className="space-y-4">
               <div className="flex justify-between gap-3">
                 <Image
                   src={sum.icon}
@@ -41,13 +41,13 @@ export default async function Dashboard() {
                   height={24}
                 />
                 <h4 className="summary-type-size">
-                  {convertFileSize(sum.size)}
+                  {convertFileSize(sum.size) || 0}
                 </h4>
               </div>
 
               <div className="text-center space-y-4">
                 <p className="summary-type-title mt-2">{sum.title}</p>
-                <div className="w-full h-[2px] bg-light-300 my-4" />
+                <div className="w-full h-[2px] bg-light-400 my-4" />
                 <p className="body-1 text-light-200">Last update</p>
                 <FormattedDateTime
                   date={sum.latestDate}
@@ -58,6 +58,8 @@ export default async function Dashboard() {
           </Link>
         ))}
       </ul>
+
+      </section>
       {/* Recent files uploaded */}
       <section className="dashboard-recent-files">
         <h2 className="h3 xl:h2 text-light-100">Recent Files Uploaded</h2>
