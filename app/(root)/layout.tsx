@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/actions/user.actions"; // Adjust the import path as needed
 import { Toaster } from "@/components/ui/toaster"
 
-export const dynamic = "force-dymamic";
+export const dynamic = "force-dynamic";
 
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
