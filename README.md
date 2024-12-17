@@ -14,20 +14,20 @@
 
 ## <br /> <a name="introduction">✨ Introduction</a>
 
-**[ENG]**
+**[ENG]** This project is a comprehensive file management system built with Next.js, Tailwind CSS, Appwrite, Shadcn UI, and React Dropzone. It offers robust features similar to Google Drive, including secure authentication, file upload, download, sharing, and advanced search and filtering capabilities.
 
-**[FR]**
+**[FR]** Ce projet est un système de gestion de fichiers complet construit avec Next.js, Tailwind CSS, Appwrite, Shadcn UI et React Dropzone. Il offre des fonctionnalités robustes similaires à Google Drive, notamment une authentification sécurisée, le téléchargement, le téléchargement, le partage de fichiers et des capacités de recherche et de filtrage avancées.
 
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 
 - [TailwindCSS](https://tailwindcss.com/docs/installation)
-It's a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
+  It's a utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
 
 - [tailwindcss-animated](https://www.npmjs.com/package/tailwindcss-animated)
-Extended animation utilities for Tailwind CSS that brings various utility classes as well as several ready-to-use CSS animations.
+  Extended animation utilities for Tailwind CSS that brings various utility classes as well as several ready-to-use CSS animations.
 
 -[shadcn/ui](https://ui.shadcn.com/docs)
-Open-source UI component library for React that focuses on flexibility and customization. 
+Open-source UI component library for React that focuses on flexibility and customization.
 
 -[Appwrite](https://www.npmjs.com/package/node-appwrite)
 Appwrite is an open-source backend as a service server that abstract and simplify complex and repetitive development tasks behind a very simple to use REST API.
@@ -40,7 +40,34 @@ Delay the execution of function or state update with useDebounce.
 
 ## <a name="features">📝 Features</a>
 
-👉 **Modern Form**: React Hook Form from *shadcn/ui*.
+### File Management:
+
+👉 **Upload**: Allows users to upload files of various types using drag-and-drop functionality.
+
+👉 **Download**: Enables users to download files directly from the platform.
+
+👉 **Sharing**: Facilitates file sharing with other users by generating unique sharing links.
+
+👉 **Advanced Search**: Provides a powerful search bar to quickly find files based on keywords or metadata.
+
+👉 **Categorization**: Organizes files into categories (Documents, Images, Media, Others) for easy navigation.
+
+👉 **Sorting**: Offers flexible sorting options within each category:
+  - *Alphabetical* Order: Sorts files alphabetically by name.
+  - *File Size*: Sorts files by size (ascending or descending).
+
+### Technical Stack:
+
+👉 **Next.js**: A React framework for building web applications.
+
+👉 **Tailwind** CSS: A utility-first CSS framework for rapid UI development.1   
+
+👉 **Appwrite**: A backend server for building web and mobile applications.
+
+👉 **Shadcn** UI: A modern UI component library built with Next.js and Tailwind CSS.
+
+👉 **React** Dropzone: A HTML5-compliant drag-and-drop zone for files.
+
 
 ## <br /> <a name="launch-app">🚀 Launch App</a>
 
@@ -48,12 +75,12 @@ Follow these steps to set up the project locally on your machine.
 
 **Prerequisites**
 
->[!NOTE]
+> [!NOTE]
 > Make sure you have the following installed on your machine:
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) *(Node Package Manager)*
+- [npm](https://www.npmjs.com/) _(Node Package Manager)_
 
 **Cloning the Repository**
 
@@ -497,12 +524,13 @@ Global styling are defined using **CSS** & **TailwindCSS**
   }
 }
 ```
+
 </details>
 
 <details>
 <summary><code>tailwind.config.js</code></summary>
 
-````cjs
+```cjs
 theme: {
     extend: {
       colors: {
@@ -552,6 +580,6 @@ theme: {
     },
   },
   plugins: [require('tailwindcss-animate')],
-````
+```
 
 </details>

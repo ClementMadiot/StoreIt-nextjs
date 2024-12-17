@@ -14,6 +14,7 @@ export default async function Dashboard() {
     getFiles({ types: [], limit: 10 }),
     getTotalSpaceUsed(),
   ]);
+  // console.log(files);
 
   // Get usage summary
   const usageSummary = getUsageSummary(totalSpace);
@@ -23,42 +24,41 @@ export default async function Dashboard() {
       <section>
         <Chart used={totalSpace.used} />
 
-      {/* Summary list */}
-      <ul className="dashboard-summary-list">
-        {usageSummary.map((sum) => (
-          <Link
-            href={sum.url}
-            key={sum.title}
-            className="dashboard-summary-card"
-          >
-            <div className="space-y-4">
-              <div className="flex justify-between gap-3">
-                <Image
-                  src={sum.icon}
-                  alt={sum.title}
-                  className="summary-type-icon"
-                  width={24}
-                  height={24}
-                />
-                <h4 className="summary-type-size">
-                  {convertFileSize(sum.size) || 0}
-                </h4>
-              </div>
+        {/* Summary list */}
+        <ul className="dashboard-summary-list">
+          {usageSummary.map((sum) => (
+            <Link
+              href={sum.url}
+              key={sum.title}
+              className="dashboard-summary-card"
+            >
+              <div className="space-y-4">
+                <div className="flex justify-between gap-3">
+                  <Image
+                    src={sum.icon}
+                    alt={sum.title}
+                    className="summary-type-icon"
+                    width={24}
+                    height={24}
+                  />
+                  <h4 className="summary-type-size">
+                    {convertFileSize(sum.size) || 0}
+                  </h4>
+                </div>
 
-              <div className="text-center space-y-4">
-                <p className="summary-type-title mt-2">{sum.title}</p>
-                <div className="w-full h-[2px] bg-light-400 my-4" />
-                <p className="body-1 text-light-200">Last update</p>
-                <FormattedDateTime
-                  date={sum.latestDate}
-                  className="body-2 text-light-100"
-                />
+                <div className="text-center space-y-4">
+                  <p className="summary-type-title mt-2">{sum.title}</p>
+                  <div className="w-full h-[2px] bg-light-400 my-4" />
+                  <p className="body-1 text-light-200">Last update</p>
+                  <FormattedDateTime
+                    date={sum.latestDate}
+                    className="body-2 text-light-100"
+                  />
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
-      </ul>
-
+            </Link>
+          ))}
+        </ul>
       </section>
       {/* Recent files uploaded */}
       <section className="dashboard-recent-files">
@@ -93,9 +93,7 @@ export default async function Dashboard() {
             ))}
           </ul>
         ) : (
-          <p className="empty-list">
-            No files uploaded yet.
-          </p>
+          <p className="empty-list">No files uploaded yet.</p>
         )}
       </section>
     </div>

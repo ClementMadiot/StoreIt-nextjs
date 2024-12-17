@@ -32,6 +32,9 @@ const Page = async ({ searchParams, params }: SearchParamProps) => {
   );
   const totalSize = currentTypeUsage ? currentTypeUsage.size : 0;
 
+  // console.log(files);
+  
+
   return (
     <div className="page-container">
       <section className="w-full">
@@ -39,8 +42,7 @@ const Page = async ({ searchParams, params }: SearchParamProps) => {
 
         <div className="total-size-section">
           <p className="body-1">
-            Total:{" "}
-            <span className="h5">{convertFileSize(totalSize)}</span>
+            Total: <span className="h5">{convertFileSize(totalSize)}</span>
           </p>
 
           {/* Sort the files  */}
