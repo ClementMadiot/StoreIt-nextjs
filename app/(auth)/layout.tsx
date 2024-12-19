@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen">
