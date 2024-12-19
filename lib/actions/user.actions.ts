@@ -23,7 +23,7 @@ const getUserByEmail = async (email: string) => {
   const result = await databases.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.usersCollectionId,
-    [Query.equal("email", email)]
+    [Query.equal("email", [email])]
   );
 
   return result.total > 0 ? result.documents[0] : null;
@@ -119,7 +119,7 @@ export const getCurrentUser = async () => {
     return parseStringify(user.documents[0]);
 
   } catch (error) {
-    console.log(error);
+    console.log(error, "Failed to get current user");
   }
 };
 
@@ -141,6 +141,8 @@ export const signInUser = async ({ email }: { email: string }) => {
   try {
     const existingUser = await getUserByEmail(email);
     // User exists, send OTP
+    console.log(existingUser);
+    
     if (existingUser) {
       await sendEmailOTP({ email });
       return parseStringify({ accountId: existingUser.accountId });
