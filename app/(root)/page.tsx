@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Models } from "node-appwrite";
 
-export default async function Dashboard() {
+const Dashboard = async () => {
   // Parallel Fetching
   const [files, totalSpace] = await Promise.all([
     getFiles({ types: [], limit: 10 }),
@@ -99,3 +99,5 @@ export default async function Dashboard() {
     </div>
   );
 }
+
+export default Dashboard;
