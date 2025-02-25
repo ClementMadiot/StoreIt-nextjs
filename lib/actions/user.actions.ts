@@ -6,7 +6,7 @@
 // 3. Send OTP to user's email
 // 4. This will send a secret key to the user's email for creating the user session.
 // 5 Create a new user document if the user does not exist
-// 6. Return the user's accountId that will be used to complete the login process.
+// 6. Return the user's accountId that will be used to complete the  in process.
 // 7. Verify OTP and authenticate to login
 
 import { createAdminClient, createSessionClient } from "../appwrite";
@@ -39,7 +39,9 @@ export const sendEmailOTP = async ({ email }: { email: string }) => {
 
   try {
     const session = await account.createEmailToken(ID.unique(), email);
-
+    console.log("create session",session);
+    
+    console.log("OTP Token:", session.secret); // Log the OTP token
     return session.userId;
   } catch (error) {
     handleError(error, "Failed to send email OTP");
@@ -55,7 +57,7 @@ export const createAccount = async ({
 }) => {
   const existingUser = await getUserByEmail(email);
 
-  const accountId = await sendEmailOTP({ email });
+  const accountId = await sendEmailOTP({ email }); // Store the OTP token as accountId
   if (!accountId) throw new Error("Failed to send an OTP");
 
   if (!existingUser) {
@@ -85,9 +87,13 @@ export const verifySecret = async ({
   try {
     // get access to account functionalities
     const { account } = await createAdminClient();
-    // generate a new session for this account
+    console.log("Account ID:", accountId);
+    console.log("Password (OTP):", password);
+    
+
+    // Use createSession to verify the OTP token
     const session = await account.createSession(accountId, password);
-    console.log(session);
+    console.log("Session:", session);    
 
     (await cookies()).set("appwrite-session", session.secret, {
       path: "/",
@@ -96,7 +102,7 @@ export const verifySecret = async ({
       secure: true,
     });
 
-    return parseStringify({ sessioId: session.$id });
+    return parseStringify({ sessionId: session.$id });
   } catch (error) {
     handleError(error, "Failed to verify OTP");
   }
@@ -140,10 +146,9 @@ export const signOutUser = async () => {
 export const signInUser = async ({ email }: { email: string }) => {
   try {
     const existingUser = await getUserByEmail(email);
-    console.log(existingUser);
+    console.log('Current info user:',existingUser);
     
     // User exists, send OTP
-    console.log(existingUser);
     
     if (existingUser) {
       await sendEmailOTP({ email });
