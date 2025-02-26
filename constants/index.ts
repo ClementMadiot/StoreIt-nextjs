@@ -3,7 +3,7 @@ export const navItems = [
   { name: "Documents", url: "/documents", icon: "/assets/icons/documents.svg" },
   { name: "Images", url: "/images", icon: "/assets/icons/images.svg" },
   { name: "Media", url: "/media", icon: "/assets/icons/video.svg" },
-  { name: "Others", url: "/other", icon: "/assets/icons/others.svg" },
+  { name: "Others", url: "/others", icon: "/assets/icons/others.svg" },
 ];
 
 export const avatarplaceholderUrl =
