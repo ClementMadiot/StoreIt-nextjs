@@ -1,7 +1,12 @@
 <div align="center">
-  <a href="" target="_blanck"><img src="./public" alt=""></a>
-   <div align="center"></div>
-  <h3 align="center">StoreIt</h3>
+  <a href="" target="_blanck"><img src="./app/storeIt-screen.png" alt="StoreIt sign-Up"></a>
+   <div align="center">
+      <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextjs" />
+      <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="typescript" />
+      <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
+      <img src="https://img.shields.io/badge/-Appwrite-black?style=for-the-badge&logoColor=white&logo=appwrite&color=FD366E" alt="appwrite" />
+    </div>
+  <h3 align="center">StoreIt - Storage and File Sharing Platform</h3>
 </div>
 
 ## <br /> 📋 <a name="table">Summary</a>
@@ -14,9 +19,9 @@
 
 ## <br /> <a name="introduction">✨ Introduction</a>
 
-**[ENG]** This project is a comprehensive file management system built with Next.js, Tailwind CSS, Appwrite, Shadcn UI, and React Dropzone. It offers robust features similar to Google Drive, including secure authentication, file upload, download, sharing, and advanced search and filtering capabilities.
+**[ENG]** This project is a comprehensive file management system built with Next.js 15 and the Appwrite Node SDK, leveraging advanced features for seamless file handling. It utilizes Tailwind CSS, ShadCN UI, and React Dropzone to create a modern and intuitive user experience. Offering Google Drive-like functionalities, it includes secure authentication, file upload, download, sharing, and advanced search and filtering capabilities for efficient file management.
 
-**[FR]** Ce projet est un système de gestion de fichiers complet construit avec Next.js, Tailwind CSS, Appwrite, Shadcn UI et React Dropzone. Il offre des fonctionnalités robustes similaires à Google Drive, notamment une authentification sécurisée, le téléchargement, le téléchargement, le partage de fichiers et des capacités de recherche et de filtrage avancées.
+**[FR]** Ce projet est un système de gestion de fichiers complet développé avec Next.js 15 et le SDK Appwrite pour Node, exploitant des fonctionnalités avancées pour une gestion fluide des fichiers. Il utilise Tailwind CSS, ShadCN UI et React Dropzone pour offrir une expérience utilisateur moderne et intuitive. Proposant des fonctionnalités similaires à Google Drive, il inclut une authentification sécurisée, l’upload et le téléchargement de fichiers, le partage, ainsi qu’une recherche avancée avec des options de filtrage pour une gestion efficace des fichiers.
 
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 
@@ -26,16 +31,16 @@
 - [tailwindcss-animated](https://www.npmjs.com/package/tailwindcss-animated)
   Extended animation utilities for Tailwind CSS that brings various utility classes as well as several ready-to-use CSS animations.
 
--[shadcn/ui](https://ui.shadcn.com/docs)
+- [shadcn/ui](https://ui.shadcn.com/docs)
 Open-source UI component library for React that focuses on flexibility and customization.
 
--[Appwrite](https://www.npmjs.com/package/node-appwrite)
+- [Appwrite](https://www.npmjs.com/package/node-appwrite)
 Appwrite is an open-source backend as a service server that abstract and simplify complex and repetitive development tasks behind a very simple to use REST API.
 
--[react-dropzone](https://react-dropzone.js.org/)
+- [react-dropzone](https://react-dropzone.js.org/)
 Simple React hook to create a HTML5-compliant drag'n'drop zone for files
 
--[useDebounce](https://www.npmjs.com/package/use-debounce)
+- [useDebounce](https://www.npmjs.com/package/use-debounce)
 Delay the execution of function or state update with useDebounce.
 
 ## <a name="features">📝 Features</a>
@@ -103,6 +108,29 @@ yarn dev
 pnpm dev
 # or
 bun dev
+```
+
+**Set Up Environment Variables**
+
+Create a new file named `.env.local` in the root of your project and add the following content:
+
+```env
+NEXT_PUBLIC_APPWRITE_ENDPOINT="https://cloud.appwrite.io/v1"
+NEXT_PUBLIC_APPWRITE_PROJECT=""
+NEXT_PUBLIC_APPWRITE_DATABASE=""
+NEXT_PUBLIC_APPWRITE_USERS_COLLECTION=""
+NEXT_PUBLIC_APPWRITE_FILES_COLLECTION=""
+NEXT_PUBLIC_APPWRITE_BUCKET=""
+NEXT_APPWRITE_KEY=""
+```
+
+Replace the values with your actual Appwrite credentials. You can obtain these credentials by signing up &
+creating a new project on the [Appwrite website](https://appwrite.io/).
+
+**Running the Project**
+
+```bash
+npm run dev
 ```
 
 ## <br /> <a name="style">🎨 Styling</a>
